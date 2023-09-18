@@ -1,5 +1,5 @@
 import pandas as pd
-import plotly as px
+import plotly.express as px
 import streamlit as st
 # Import csv
 vg_sales = pd.read_csv(r"vgsales.csv")
@@ -98,7 +98,7 @@ vg_company_filtered = vg_clean[vg_clean.Company.isin(company_selected)]
 ## Plot timeseries of sales
 st.markdown("### Time Series of Video Game Sales (millions of units sold)")
 vg_group_line = vg_company_filtered.groupby(["Company", "Year"], as_index=False).sum()
-fig = px.express.line(vg_group_line, x="Year", y=region_select, color="Company")
+fig = px.line(vg_group_line, x="Year", y=region_select, color="Company")
 st.plotly_chart(fig, use_container_width=True)
 
 ## Plot genre bar graph
