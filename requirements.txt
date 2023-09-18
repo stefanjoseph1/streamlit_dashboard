@@ -1,1 +1,3 @@
-https://github.com/plotly/plotly_express
+pandas
+plotly
+streamlit
