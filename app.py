@@ -2,7 +2,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 # Import csv
-vg_sales = pd.read_csv(r"C:\Users\stefa\Jupyter Code\Video game sales\vgsales.csv")
+vg_sales = pd.read_csv("vgsales.csv")
 
 # Data Transforms
 ## Rename columns
