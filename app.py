@@ -1,8 +1,8 @@
 import pandas as pd
-import plotly.express as px
+import plotly as px
 import streamlit as st
 # Import csv
-vg_sales = pd.read_csv("vgsales.csv")
+vg_sales = pd.read_csv(r"C:\Users\stefa\Jupyter Code\Video game sales\vgsales.csv")
 
 # Data Transforms
 ## Rename columns
@@ -98,14 +98,16 @@ vg_company_filtered = vg_clean[vg_clean.Company.isin(company_selected)]
 ## Plot timeseries of sales
 st.markdown("### Time Series of Video Game Sales (millions of units sold)")
 vg_group_line = vg_company_filtered.groupby(["Company", "Year"], as_index=False).sum()
-fig = px.line(vg_group_line, x="Year", y=region_select, color="Company")
+fig = px.express.line(vg_group_line, x="Year", y=region_select, color="Company")
 st.plotly_chart(fig, use_container_width=True)
 
 ## Plot genre bar graph
+st.markdown("### Game Sales by Genre (millions of units sold)")
 vg_group_bar = vg_company_filtered.groupby(["Genre", "Company"], as_index=False).sum()[["Genre", region_select, "Company"]]
 st.bar_chart(vg_group_bar, x="Genre", y=region_select, color="Company")
 
 ## Plot metircs of most sold video games by company
+st.markdown("### Most Popular Games")
 vg_group_metric = vg_company_filtered.groupby(["Company"], as_index=False).agg({"Name": "first", "Platform": "first", region_select: max})
 company_subset = vg_group_metric.Company.unique()
 col1, col2 = st.columns(2)
